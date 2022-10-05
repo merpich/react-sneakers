@@ -1,0 +1,184 @@
+@import "./libs/reset";
+@import "./libs/mixins";
+@import "./variables";
+
+body {
+	padding: 85px 10px;
+	background: $bg-second;
+	font-family: 'Inter', system-ui;
+	font-size: 16px;
+	color: $fc-primary;
+}
+
+.wrapper {
+	max-width: 1100px;
+	margin: 0 auto;
+	background: $bg-primary;
+	border-radius: $brs-primary;
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	padding: 45px;
+	border-bottom: $border;
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+	&__img {
+		margin-right: 15px;
+	}
+	&__title {
+		font-size: 20px;
+		text-transform: uppercase;
+	}
+	&__caption {
+		font-size: 14px;
+		color: $fc-third;
+	}
+}
+
+.nav {
+	display: flex;
+	align-items: center;
+	&__list {
+		display: flex;
+		align-items: center;
+		gap: 0 30px;
+	}
+	&__item {
+		display: flex;
+		align-items: center;
+	}
+	&__icon {
+		display: flex;
+		fill: none;
+		stroke: $stroke;
+		&_cart {
+			&:hover {
+				stroke: $accent;
+			}
+		}
+		&_heart {
+			&:hover {
+				stroke: $like;
+			}
+		}
+	}
+	&__cost {
+		margin: 0 0 0 10px;
+		font-size: 14px;
+		font-weight: 600;
+	}
+}
+
+.main {
+	padding: 45px;
+}
+
+.content {
+	display: grid;
+	gap: 30px 0;
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+
+.search {
+	display: flex;
+	align-items: center;
+	gap: 0 15px;
+	padding: 14px;
+	border-radius: $brs-third;
+	border: $border;
+	box-sizing: border-box;
+	&__input {
+		border: 0;
+		outline: 0;
+		font-size: 14px;
+		&::placeholder {
+			color: $fc-third;
+		}
+	}
+	&__icon {
+		fill: none;
+		stroke: $stroke;
+	}
+}
+
+.title {
+	font-size: 32px;
+}
+
+.catalog {
+	display: grid;
+	grid-template-columns: (repeat(auto-fit, 222.5px));
+	gap: 40px;
+}
+
+.card {
+	position: relative;
+	padding: 30px;
+	border-radius: $brs-primary;
+	border: $border;
+	display: grid;
+	gap: 15px;
+	transition: all 0.4s ease 0s;
+	&:hover {
+		box-shadow: 0px 14px 30px rgba(0, 0, 0, 0.05);
+		transform: translate(0, -10px);
+	}
+	&__title {
+		font-size: 14px;
+		font-weight: 500;
+	}
+	&__info {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	&__cost {
+		display: grid;
+	}
+	&__price {
+		font-size: 12px;
+		font-weight: 500;
+		color: $fc-third;
+	}
+	&__number {
+		font-size: 14px;
+		font-weight: 700;
+	}
+	&__button {
+		width: 32px;
+		height: 32px;
+		border: $border;
+		border-radius: $brs-third;
+		background: $bg-primary;
+		&_like {
+			padding-top: 4px;
+			position: absolute;
+			top: 30px;
+			left: 30px;
+		}
+		&:hover {
+			.card__icon_plus {
+				stroke: $accent;
+			}
+			.card__icon_like {
+				fill: $like;
+				stroke: $like;
+			}
+		}
+	}
+	&__icon {
+		align-items: center;
+		stroke: $stroke;
+		fill: none;
+	}
+}

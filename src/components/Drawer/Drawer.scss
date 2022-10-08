@@ -1,0 +1,145 @@
+.overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 5;
+}
+
+.drawer {
+	display: flex;
+	flex-direction: column;
+	gap: 30px 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	max-width: 385px;
+	height: 100%;
+	padding: 30px;
+	background: var(--bg-primary);
+	&__header {
+		display: flex;
+		justify-content: space-between;
+	}
+	&__title {
+		font-size: 24px;
+	}
+	&__button {
+		background: transparent;
+		border: 0;
+		padding: 5px;
+		&:hover {
+			.drawer__icon {
+				stroke: var(--accent);
+			}
+		}
+	}
+	&__icon {
+		stroke: $stroke;
+		fill: none;
+		transform: rotate(45deg);
+		transition: stroke 0.1s ease-in-out;
+	}
+}
+
+.cart {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	flex: 1;
+	overflow: auto;
+}
+
+.cart-item {
+	display: flex;
+	align-items: center;
+	padding: 20px;
+	border-radius: var(--brs-second);
+	border: var(--border);
+	&__image {
+		margin: 0 20px 0 0;
+	}
+	&__info {
+		max-width: 150px;
+		margin: 0 10px 0 0;
+	}
+	&__title {
+		font-size: 14px;
+		font-weight: 500;
+	}
+	&__price {
+		font-size: 14px;
+		font-weight: 700;
+	}
+	&__button {
+		width: 32px;
+		height: 32px;
+		border-radius: var(--brs-third);
+		border: var(--border);
+		background: var(--bg-primary);
+		&:hover {
+			.cart-item__icon {
+				stroke: $accent;
+			}
+		}
+	}
+	&__icon {
+		stroke: var(--stroke);
+		fill: none;
+		transform: rotate(45deg);
+		transition: all 0.1s ease-in-out;
+	}
+}
+
+.total {
+	display: grid;
+	gap: 25px 0;
+	&__info {
+		display: grid;
+		gap: 20px 0;
+	}
+	&__item {
+		display: flex;
+		gap: 0 8px;
+	}
+	&__price {
+		font-weight: 600;
+	}
+	&__dashed {
+		flex: 1;
+		margin: 0 0 4px 0;
+		border-bottom: 1px dashed var(--stroke);
+	}
+}
+
+.button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	padding: 20px;
+	border-radius: var(--brs-second);
+	border: 0;
+	background: $accent;
+	transition: background 0.1s ease-in-out;
+	&:hover {
+		background: lighten($color: var(--accent), $amount: 5%);
+	}
+	&:active {
+		background: darken($color: var(--accent), $amount: 5%);
+	}
+	&__text {
+		font-family: inherit;
+		font-size: 16px;
+		font-weight: 600;
+		color: var(--fc-second);
+	}
+	&__icon {
+		position: absolute;
+		right: 30px;
+		stroke: var(--fc-second);
+		fill: none;
+	}
+}

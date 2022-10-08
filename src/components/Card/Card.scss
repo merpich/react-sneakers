@@ -1,0 +1,61 @@
+.card {
+	display: grid;
+	gap: 15px;
+	position: relative;
+	padding: 30px;
+	border-radius: var(--brs-primary);
+	border: var(--border);
+	background: var(--bg-primary);
+	transition: all 0.4s ease 0s;
+	&:hover {
+		box-shadow: 0px 14px 30px rgba(0, 0, 0, 0.05);
+		transform: translate(0, -10px);
+	}
+	&__title {
+		font-size: 14px;
+		font-weight: 500;
+	}
+	&__info {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	&__cost {
+		display: grid;
+	}
+	&__price {
+		font-size: 12px;
+		font-weight: 500;
+		color: var(--fc-third);
+	}
+	&__number {
+		font-size: 14px;
+		font-weight: 700;
+	}
+	&__button {
+		width: 32px;
+		height: 32px;
+		border: var(--border);
+		border-radius: var(--brs-third);
+		background: var(--bg-primary);
+		&_like {
+			position: absolute;
+			top: 30px;
+			left: 30px;
+			padding-top: 4px;
+		}
+		&:hover {
+			.card__icon_plus {
+				stroke: var(--accent);
+			}
+			.card__icon_like {
+				fill: var(--like);
+				stroke: var(--like);
+			}
+		}
+	}
+	&__icon {
+		stroke: var(--stroke);
+		fill: none;
+	}
+}

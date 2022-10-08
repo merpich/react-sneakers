@@ -4,77 +4,18 @@
 
 body {
 	padding: 85px 10px;
-	background: $bg-second;
+	background: var(--bg-second);
 	font-family: 'Inter', system-ui;
 	font-size: 16px;
-	color: $fc-primary;
+	color: var(--fc-primary);
 }
 
 .wrapper {
 	max-width: 1100px;
 	margin: 0 auto;
-	background: $bg-primary;
-	border-radius: $brs-primary;
+	background: var(--bg-primary);
+	border-radius: var(--brs-primary);
 	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
-}
-
-.header {
-	display: flex;
-	justify-content: space-between;
-	padding: 45px;
-	border-bottom: $border;
-}
-
-.logo {
-	display: flex;
-	align-items: center;
-	&__img {
-		margin-right: 15px;
-	}
-	&__title {
-		font-size: 20px;
-		text-transform: uppercase;
-		color: $fc-primary;
-	}
-	&__caption {
-		font-size: 14px;
-		color: $fc-third;
-	}
-}
-
-.nav {
-	display: flex;
-	align-items: center;
-	&__list {
-		display: flex;
-		align-items: center;
-		gap: 0 30px;
-	}
-	&__item {
-		display: flex;
-		align-items: center;
-	}
-	&__icon {
-		display: flex;
-		fill: none;
-		stroke: $stroke;
-		transition: all 0.1s ease-in-out;
-		&_cart {
-			&:hover {
-				stroke: $accent;
-			}
-		}
-		&_heart {
-			&:hover {
-				stroke: $like;
-			}
-		}
-	}
-	&__cost {
-		margin: 0 0 0 10px;
-		font-size: 14px;
-		font-weight: 600;
-	}
 }
 
 .main {
@@ -96,8 +37,8 @@ body {
 	align-items: center;
 	gap: 0 15px;
 	padding: 14px;
-	border-radius: $brs-third;
-	border: $border;
+	border-radius: var(--brs-third);
+	border: var(--border);
 	box-sizing: border-box;
 	cursor: text;
 	&__input {
@@ -106,12 +47,12 @@ body {
 		font-family: inherit;
 		font-size: 14px;
 		&::placeholder {
-			color: $fc-third;
+			color: var(--fc-third);
 		}
 	}
 	&__icon {
 		fill: none;
-		stroke: $stroke;
+		stroke: var(--stroke);
 	}
 }
 
@@ -123,213 +64,4 @@ body {
 	display: grid;
 	grid-template-columns: (repeat(auto-fit, 222.5px));
 	gap: 40px;
-}
-
-.card {
-	display: grid;
-	gap: 15px;
-	position: relative;
-	padding: 30px;
-	border-radius: $brs-primary;
-	border: $border;
-	background: $bg-primary;
-	transition: all 0.4s ease 0s;
-	&:hover {
-		box-shadow: 0px 14px 30px rgba(0, 0, 0, 0.05);
-		transform: translate(0, -10px);
-	}
-	&__title {
-		font-size: 14px;
-		font-weight: 500;
-	}
-	&__info {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-	&__cost {
-		display: grid;
-	}
-	&__price {
-		font-size: 12px;
-		font-weight: 500;
-		color: $fc-third;
-	}
-	&__number {
-		font-size: 14px;
-		font-weight: 700;
-	}
-	&__button {
-		width: 32px;
-		height: 32px;
-		border: $border;
-		border-radius: $brs-third;
-		background: $bg-primary;
-		&_like {
-			position: absolute;
-			top: 30px;
-			left: 30px;
-			padding-top: 4px;
-		}
-		&:hover {
-			.card__icon_plus {
-				stroke: $accent;
-			}
-			.card__icon_like {
-				fill: $like;
-				stroke: $like;
-			}
-		}
-	}
-	&__icon {
-		stroke: $stroke;
-		fill: none;
-		transition: all 0.1s ease-in-out;
-	}
-}
-
-.overlay {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background: rgba(0, 0, 0, 0.5);
-	z-index: 5;
-}
-
-.drawer {
-	display: flex;
-	flex-direction: column;
-	gap: 30px 0;
-	position: absolute;
-	top: 0;
-	right: 0;
-	max-width: 385px;
-	height: 100%;
-	padding: 30px;
-	background: $bg-primary;
-	&__header {
-		display: flex;
-		justify-content: space-between;
-	}
-	&__title {
-		font-size: 24px;
-	}
-	&__button {
-		background: transparent;
-		border: 0;
-		padding: 5px;
-		&:hover {
-			.drawer__icon {
-				stroke: $accent;
-			}
-		}
-	}
-	&__icon {
-		stroke: $stroke;
-		fill: none;
-		transform: rotate(45deg);
-		transition: stroke 0.1s ease-in-out;
-	}
-}
-
-.cart {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	flex: 1;
-	overflow: auto;
-}
-
-.cart-item {
-	display: flex;
-	align-items: center;
-	padding: 20px;
-	border-radius: $brs-second;
-	border: $border;
-	&__image {
-		margin: 0 20px 0 0;
-	}
-	&__info {
-		max-width: 150px;
-		margin: 0 10px 0 0;
-	}
-	&__title {
-		font-size: 14px;
-		font-weight: 500;
-	}
-	&__price {
-		font-size: 14px;
-		font-weight: 700;
-	}
-	&__button {
-		width: 32px;
-		height: 32px;
-		border-radius: $brs-third;
-		border: $border;
-		background: $bg-primary;
-		&:hover {
-			.cart-item__icon {
-				stroke: $accent;
-			}
-		}
-	}
-	&__icon {
-		stroke: $stroke;
-		fill: none;
-		transform: rotate(45deg);
-		transition: all 0.1s ease-in-out;
-	}
-}
-
-.total {
-	display: grid;
-	gap: 25px 0;
-	&__info {
-		display: grid;
-		gap: 20px 0;
-	}
-	&__item {
-		display: flex;
-		gap: 0 8px;
-	}
-	&__price {
-		font-weight: 600;
-	}
-	&__dashed {
-		flex: 1;
-		margin: 0 0 4px 0;
-		border-bottom: 1px dashed $stroke;
-	}
-}
-
-.button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: relative;
-	padding: 20px;
-	border-radius: $brs-second;
-	border: 0;
-	background: $accent;
-	transition: background 0.1s ease-in-out;
-	&:hover {
-		background: lighten($color: $accent, $amount: 5%);
-	}
-	&:active {
-		background: darken($color: $accent, $amount: 5%);
-	}
-	&__text {
-		font-family: inherit;
-		font-size: 16px;
-		font-weight: 600;
-		color: $fc-second;
-	}
-	&__icon {
-		position: absolute;
-		right: 30px;
-		stroke: $fc-second;
-		fill: none;
-	}
 }

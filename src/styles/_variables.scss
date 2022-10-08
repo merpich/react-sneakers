@@ -1,22 +1,24 @@
-// Background colors
-$bg-primary: #FFFFFF;
-$bg-second: #E7F6FF;
+:root {
+	// Background colors
+	--bg-primary: #FFFFFF;
+	--bg-second: #E7F6FF;
 
-// Font colors
-$fc-primary: #000000;
-$fc-second: #FFFFFF;
-$fc-third: #BDBDBD;
-$fc-fourth: #87C20A;
+	// Font colors
+	--fc-primary: #000000;
+	--fc-second: #FFFFFF;
+	--fc-third: #BDBDBD;
+	--fc-fourth: #87C20A;
 
-// UI colors
-$overlay: #5C5C5C;
-$accent: #9DD458;
-$btn-like: #FEF0F0;
-$like: #FF8585;
-$stroke: #BDBDBD;
+	// UI colors
+	--overlay: #5C5C5C;
+	--accent: #9DD458;
+	--btn-like: #FEF0F0;
+	--like: #FF8585;
+	--stroke: #BDBDBD;
 
-// Borders
-$border: 1px solid #F3F3F3;
-$brs-primary: 40px;
-$brs-second: 20px;
-$brs-third: 10px;
+	// Borders
+	--border: 1px solid #F3F3F3;
+	--brs-primary: 40px;
+	--brs-second: 20px;
+	--brs-third: 10px;
+}

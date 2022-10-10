@@ -38,12 +38,6 @@
 		border: var(--border);
 		border-radius: var(--brs-third);
 		background: var(--bg-primary);
-		&_like {
-			position: absolute;
-			top: 30px;
-			left: 30px;
-			padding-top: 4px;
-		}
 		&:hover {
 			.card__icon_plus {
 				stroke: var(--accent);
@@ -53,9 +47,22 @@
 				stroke: var(--like);
 			}
 		}
+		&_like {
+			position: absolute;
+			top: 30px;
+			left: 30px;
+			padding: 4px 0 0;
+		}
+		&_checked {
+			padding: 0 0 0 1px;
+			background: var(--accent);
+		}
 	}
 	&__icon {
 		stroke: var(--stroke);
 		fill: none;
+		&_checked {
+			stroke: var(--light);
+		}
 	}
 }

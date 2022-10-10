@@ -1,3 +1,4 @@
+import React from 'react';
 import Card from './components/Card/Card';
 import Drawer from './components/Drawer/Drawer';
 import Header from './components/Header/Header';
@@ -33,7 +34,8 @@ function App() {
 								title={item.title}
 								price={item.price}
 								imageUrl={item.imageUrl}
-								onClick={() => console.log(sneakers)}
+								onLike={() => console.log('Добавили в закладки')}
+								onPlus={() => console.log('Нажали на полюс')}
 							/>
 						))}
 					</div>

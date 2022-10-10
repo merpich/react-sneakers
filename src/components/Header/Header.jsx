@@ -1,6 +1,6 @@
 import './Header.scss';
 
-function Header() {
+function Header(props) {
 	return (
 		<header className="header">
 			<a className="logo" href="/">
@@ -13,10 +13,12 @@ function Header() {
 			<nav className="nav">
 				<ul className="nav__list">
 					<li className="nav__item">
-						<svg className="nav__icon nav__icon_cart" width={20} height={20}>
-							<use xlinkHref="/img/icons/sprites.svg#cart"></use>
-						</svg>
-						<div className="nav__cost">1205 руб.</div>
+						<button className="nav__button" onClick={props.onClickCart}>
+							<svg className="nav__icon nav__icon_cart" width={20} height={20}>
+								<use xlinkHref="/img/icons/sprites.svg#cart"></use>
+							</svg>
+							<span className="nav__cost">1205 руб.</span>
+						</button>
 					</li>
 					<li className="nav__item">
 						<svg className="nav__icon nav__icon_heart" width={20} height={20}>

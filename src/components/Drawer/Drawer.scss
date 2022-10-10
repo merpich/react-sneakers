@@ -38,7 +38,7 @@
 		}
 	}
 	&__icon {
-		stroke: $stroke;
+		stroke: var(--stroke);
 		fill: none;
 		transform: rotate(45deg);
 		transition: stroke 0.1s ease-in-out;
@@ -82,7 +82,7 @@
 		background: var(--bg-primary);
 		&:hover {
 			.cart-item__icon {
-				stroke: $accent;
+				stroke: var(--accent);
 			}
 		}
 	}
@@ -123,13 +123,13 @@
 	padding: 20px;
 	border-radius: var(--brs-second);
 	border: 0;
-	background: $accent;
+	background: var(--accent);
 	transition: background 0.1s ease-in-out;
 	&:hover {
-		background: lighten($color: var(--accent), $amount: 5%);
+		background: lighten($color: #9DD458, $amount: 5%);
 	}
 	&:active {
-		background: darken($color: var(--accent), $amount: 5%);
+		background: darken($color: #9DD458, $amount: 5%);
 	}
 	&__text {
 		font-family: inherit;

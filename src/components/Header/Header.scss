@@ -30,19 +30,22 @@
 		align-items: center;
 		gap: 0 30px;
 	}
-	&__item {
+	&__button {
 		display: flex;
 		align-items: center;
+		border: 0;
+		background: transparent;
+		font-family: inherit;
+		&:hover {
+			.nav__icon_cart {
+				stroke: var(--accent);
+			}
+		}
 	}
 	&__icon {
 		display: flex;
 		fill: none;
 		stroke: var(--stroke);
-		&_cart {
-			&:hover {
-				stroke: var(--accent);
-			}
-		}
 		&_heart {
 			&:hover {
 				stroke: var(--like);

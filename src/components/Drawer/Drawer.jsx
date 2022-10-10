@@ -1,10 +1,12 @@
-function Drawer() {
+import './Drawer.scss';
+
+function Drawer(props) {
 	return (
-		<div className="overlay" style={{display: 'none'}}>
+		<div className="overlay">
 			<div className="drawer">
 				<div className="drawer__header">
 					<h2 className="drawer__title">Корзина</h2>
-					<button className="drawer__button">
+					<button className="drawer__button" onClick={props.onClose}>
 						<svg className="drawer__icon" width={20} height={20}>
 							<use xlinkHref="/img/icons/sprites.svg#plus"></use>
 						</svg>

@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from './components/Card/Card';
 import Drawer from './components/Drawer/Drawer';
 import Header from './components/Header/Header';
 
-const sneakers = [
-	{title: 'Мужские Кроссовки Nike Blazer Mid Suede', price: 12999, imageUrl: '/img/sneakers/1.jpg'},
-	{title: 'Мужские Кроссовки Nike Air Max 270', price: 12999, imageUrl: '/img/sneakers/2.jpg'},
-	{title: 'Мужские Кроссовки Nike Blazer Mid Suede', price: 8499, imageUrl: '/img/sneakers/3.jpg'},
-	{title: 'Кроссовки Puma X Aka Boku Future Rider', price: 8499, imageUrl: '/img/sneakers/4.jpg'},
-];
-
 function App() {
+	const [items, setItems] = useState([]);
+	const [cartOpened, setCartOpened] = useState(false);
+
+	fetch('https://63445df3dcae733e8fddd57c.mockapi.io/items')
+		.then(response  => response.json())
+		.then(json => console.log(json));
+
 	return (
 		<div className="wrapper">
-			<Drawer />
-			<Header />
+			{cartOpened && <Drawer onClose={() => setCartOpened(false)} />}
+			<Header onClickCart={() => setCartOpened(true)} />
 
 			<main className="main">
 				<div className="content">
@@ -29,7 +29,7 @@ function App() {
 					</div>
 
 					<div className="catalog">
-						{sneakers.map(item => (
+						{items.map(item => (
 							<Card
 								title={item.title}
 								price={item.price}

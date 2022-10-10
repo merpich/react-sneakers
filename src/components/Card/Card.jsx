@@ -8,10 +8,6 @@ function Card(props) {
 		setIsAdded(!isAdded);
 	}
 
-	useEffect(() => {
-		console.log('Переменная изменилась')
-	}, [isAdded]);
-
 	return (
 		<article className="card">
 			<button className="card__button card__button_like" onClick={props.onLike}>

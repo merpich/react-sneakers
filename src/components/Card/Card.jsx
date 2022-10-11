@@ -1,26 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './Card.scss';
 
-function Card(props) {
+function Card({ title, imageUrl, price, onLike, onPlus }) {
 	const [isAdded, setIsAdded] = useState(false);
 
 	const handlePlus = () => {
+		onPlus({title, imageUrl, price});
 		setIsAdded(!isAdded);
 	}
 
 	return (
 		<article className="card">
-			<button className="card__button card__button_like" onClick={props.onLike}>
+			<button className="card__button card__button_like" onClick={onLike}>
 				<svg className="card__icon card__icon_like" width={15} height={15}>
 					<use xlinkHref="/img/icons/sprites.svg#heart"></use>
 				</svg>
 			</button>
-			<img className="card__img" width={130} height={110} src={props.imageUrl} alt="Sneakers" />
-			<h5 className="card__title">{props.title}</h5>
+			<img className="card__img" width={130} height={110} src={imageUrl} alt="Sneakers" />
+			<h5 className="card__title">{title}</h5>
 			<div className="card__info">
 				<div className="card__cost">
 					<span className="card__price">Цена:</span>
-					<span className="card__number">{props.price} руб.</span>
+					<span className="card__number">{price} руб.</span>
 				</div>
 				<button
 					className={isAdded

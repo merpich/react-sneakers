@@ -1,12 +1,12 @@
 import './Drawer.scss';
 
-function Drawer(props) {
+function Drawer({ onClose, items = [] }) {
 	return (
 		<div className="overlay">
 			<div className="drawer">
 				<div className="drawer__header">
 					<h2 className="drawer__title">Корзина</h2>
-					<button className="drawer__button" onClick={props.onClose}>
+					<button className="drawer__button" onClick={onClose}>
 						<svg className="drawer__icon" width={20} height={20}>
 							<use xlinkHref="/img/icons/sprites.svg#plus"></use>
 						</svg>
@@ -14,30 +14,21 @@ function Drawer(props) {
 				</div>
 
 				<div className="cart">
-					<article className="cart-item">
-						<img className="cart-item__image" width={70} height={70} src="/img/sneakers/1.jpg" alt="Sneakers" />
-						<div className="cart-item__info">
-							<h4 className="cart-item__title">Мужские Кроссовки Nike Air Max 270</h4>
-							<span className="cart-item__price">12 999 руб.</span>
-						</div>
-						<button className="cart-item__button">
-							<svg className="cart-item__icon" width={11} height={11}>
-								<use xlinkHref="/img/icons/sprites.svg#plus"></use>
-							</svg>
-						</button>
-					</article>
-					<article className="cart-item">
-						<img className="cart-item__image" width={70} height={70} src="/img/sneakers/1.jpg" alt="Sneakers" />
-						<div className="cart-item__info">
-							<h4 className="cart-item__title">Мужские Кроссовки Nike Air Max 270</h4>
-							<span className="cart-item__price">12 999 руб.</span>
-						</div>
-						<button className="cart-item__button">
-							<svg className="cart-item__icon" width={11} height={11}>
-								<use xlinkHref="/img/icons/sprites.svg#plus"></use>
-							</svg>
-						</button>
-					</article>
+					{items.map(item => (
+						<article className="cart-item">
+							<img className="cart-item__image" width={70} height={70} src={item.imageUrl} alt="Sneakers" />
+							<div className="cart-item__info">
+								<h4 className="cart-item__title">{item.title}</h4>
+								<span className="cart-item__price">{item.price} руб.</span>
+							</div>
+							<button className="cart-item__button">
+								<svg className="cart-item__icon" width={11} height={11}>
+									<use xlinkHref="/img/icons/sprites.svg#plus"></use>
+								</svg>
+							</button>
+						</article>
+					))}
+
 				</div>
 
 				<div className="total">

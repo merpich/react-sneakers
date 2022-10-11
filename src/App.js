@@ -5,6 +5,7 @@ import Header from './components/Header/Header';
 
 function App() {
 	const [items, setItems] = useState([]);
+	const [cartItems, setCartItems] = useState([]);
 	const [cartOpened, setCartOpened] = useState(false);
 
 	useEffect(() => {
@@ -13,9 +14,18 @@ function App() {
 			.then(json => setItems(json));
 	}, []);
 
+	const addToCart = (product) => {
+		setCartItems(prev => [...prev, product]);
+	}
+
 	return (
 		<div className="wrapper">
-			{cartOpened && <Drawer onClose={() => setCartOpened(false)} />}
+			{cartOpened
+				&& <Drawer
+					onClose={() => setCartOpened(false)}
+					items={cartItems}
+				/>}
+
 			<Header onClickCart={() => setCartOpened(true)} />
 
 			<main className="main">
@@ -37,7 +47,7 @@ function App() {
 								price={item.price}
 								imageUrl={item.imageUrl}
 								onLike={() => console.log('Добавили в закладки')}
-								onPlus={() => console.log('Нажали на полюс')}
+								onPlus={(product) => addToCart(product)}
 							/>
 						))}
 					</div>

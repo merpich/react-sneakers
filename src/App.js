@@ -6,6 +6,7 @@ import Header from './components/Header/Header';
 function App() {
 	const [items, setItems] = useState([]);
 	const [cartItems, setCartItems] = useState([]);
+	const [searchValue, setSearchValue] = useState('');
 	const [cartOpened, setCartOpened] = useState(false);
 
 	useEffect(() => {
@@ -16,6 +17,10 @@ function App() {
 
 	const addToCart = (product) => {
 		setCartItems(prev => [...prev, product]);
+	}
+
+	const onChangeSearchInput = (event) => {
+		setSearchValue(event.target.value);
 	}
 
 	return (
@@ -31,18 +36,26 @@ function App() {
 			<main className="main">
 				<div className="content">
 					<div className="content__header">
-						<h1 className="title">Все кроссовки</h1>
+						<h1 className="title" value={searchValue}>{searchValue ? `Поиск по запросу: "${searchValue}"` : 'Все кроссовки'}</h1>
 						<label className="search">
 							<svg className="search__icon" width={14} height={14}>
 								<use xlinkHref="/img/icons/sprites.svg#search"></use>
 							</svg>
-							<input className="search__input" type="text" placeholder="Поиск..." />
+							<input
+								className="search__input"
+								type="text"
+								placeholder="Поиск..."
+								onChange={onChangeSearchInput}
+							/>
 						</label>
 					</div>
 
 					<div className="catalog">
-						{items.map(item => (
+						{items
+							.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+							.map((item, index) => (
 							<Card
+								key={index}
 								title={item.title}
 								price={item.price}
 								imageUrl={item.imageUrl}

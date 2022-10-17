@@ -52,6 +52,9 @@
 			top: 30px;
 			left: 30px;
 			padding: 4px 0 0;
+			&_active {
+				background: var(--btn-like);
+			}
 		}
 		&_checked {
 			padding: 0 0 0 1px;
@@ -63,6 +66,12 @@
 		fill: none;
 		&_checked {
 			stroke: var(--light);
+		}
+		&_like {
+			&_active {
+				stroke: var(--like);
+				fill: var(--like);
+			}
 		}
 	}
 }

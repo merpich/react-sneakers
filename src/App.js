@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import Card from './components/Card/Card';
 import Drawer from './components/Drawer/Drawer';
 import Header from './components/Header/Header';
+import Favourites from './components/Favourites/Favourites';
 
 function App() {
 	const [items, setItems] = useState([]);
 	const [cartItems, setCartItems] = useState([]);
+	const [favourites, setFavourites] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
 	const [cartOpened, setCartOpened] = useState(false);
 
@@ -28,6 +31,11 @@ function App() {
 		setCartItems(prev => prev.filter(item => item.id !== id));
 	}
 
+	const addFavourite = (product) => {
+		axios.post('https://63445df3dcae733e8fddd57c.mockapi.io/favourites', product);
+		setFavourites(prev => [...prev, product]);
+	}
+
 	const onChangeSearchInput = (event) => {
 		setSearchValue(event.target.value);
 	}
@@ -42,6 +50,10 @@ function App() {
 				/>}
 
 			<Header onClickCart={() => setCartOpened(true)} />
+
+			<Routes>
+				<Route path="/favourites" element={<Favourites />} />
+			</Routes>
 
 			<main className="main">
 				<div className="content">
@@ -69,7 +81,7 @@ function App() {
 								title={item.title}
 								price={item.price}
 								imageUrl={item.imageUrl}
-								onLike={() => console.log('Добавили в закладки')}
+								onFavourite={(product) => addFavourite(product)}
 								onPlus={(product) => addToCart(product)}
 							/>
 						))}

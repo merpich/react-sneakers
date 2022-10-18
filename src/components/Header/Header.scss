@@ -40,17 +40,15 @@
 			.nav__icon_cart {
 				stroke: var(--accent);
 			}
+			.nav__icon_heart {
+				stroke: var(--like);
+			}
 		}
 	}
 	&__icon {
 		display: flex;
 		fill: none;
 		stroke: var(--stroke);
-		&_heart {
-			&:hover {
-				stroke: var(--like);
-			}
-		}
 	}
 	&__cost {
 		margin: 0 0 0 10px;

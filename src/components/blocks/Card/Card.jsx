@@ -17,14 +17,12 @@ function Card({ id, title, imageUrl, price, addToCart, addFavourite, favourited 
 
 	return (
 		<article className="card">
-			<button className={isFavourite
-					? 'card__button card__button_like card__button_like_active'
-					: 'card__button card__button_like'}
+			<button
+				className={`card__button card__button_like ${isFavourite && 'card__button_like_active'}`}
 				onClick={onLike}
 			>
-				<svg className={isFavourite
-						? 'card__icon card__icon_like card__icon_like_active'
-						: 'card__icon card__icon_like'}
+				<svg
+					className={`card__icon card__icon_like ${isFavourite && 'card__icon_like_active'}`}
 					width={15}
 					height={15}
 				>
@@ -40,21 +38,16 @@ function Card({ id, title, imageUrl, price, addToCart, addFavourite, favourited 
 					<span className="card__number">{price} руб.</span>
 				</div>
 
-				<button className={isAdded
-						? 'card__button card__button_checked'
-						: 'card__button'}
+				<button
+					className={`card__button ${isAdded && 'card__button_checked'}`}
 					onClick={onPlus}
 				>
-					<svg className={isAdded
-							?'card__icon card__icon_checked'
-							:'card__icon card__icon_plus'}
+					<svg
+						className={`card__icon ${isAdded ? 'card__icon_checked' : 'card__icon_plus'}`}
 						width={11}
 						height={11}
 					>
-						<use xlinkHref={isAdded
-							? '/img/icons/sprites.svg#checked'
-							: '/img/icons/sprites.svg#plus'}
-						></use>
+						<use xlinkHref={isAdded ? '/img/icons/sprites.svg#checked' : '/img/icons/sprites.svg#plus'}></use>
 					</svg>
 				</button>
 			</div>

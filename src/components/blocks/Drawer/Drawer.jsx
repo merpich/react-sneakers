@@ -56,6 +56,7 @@ function Drawer({ onClose, onRemove, products = [] }) {
 							</>
 						) : (
 							<State
+								imageUrl="/img/icons/empty-cart.png"
 								title="Корзина пустая"
 								text="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
 								action="close"

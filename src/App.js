@@ -9,13 +9,20 @@ import Products from './pages/Products';
 import axios from 'axios';
 
 function App() {
+	const [products, setProducts] = useState([]);
 	const [cartOpened, setCartOpened] = useState(false);
 	const [cartProducts, setCartProducts] = useState([]);
 	const [favourites, setFavourites] = useState([]);
 
 	useEffect(() => {
+		axios.get('https://63445df3dcae733e8fddd57c.mockapi.io/products')
+			.then(response => setProducts(response.data));
+
 		axios.get('https://63445df3dcae733e8fddd57c.mockapi.io/cart')
 			.then(response => setCartProducts(response.data));
+
+		axios.get('https://63445df3dcae733e8fddd57c.mockapi.io/favourites')
+			.then(response => setFavourites(response.data));
 	}, []);
 
 	const closeCart = (event) => {
@@ -26,21 +33,31 @@ function App() {
 		}
 	}
 
-	const addToCart = (product) => {
-		axios.post('https://63445df3dcae733e8fddd57c.mockapi.io/cart', product)
-			.then(response => response.data)
-			.then(data => setCartProducts(prev => [...prev, data]));
+	const addFavourite = async (product) => {
+		try {
+			if (favourites.find(fav => fav.id === product.id)) {
+				axios.delete(`https://63445df3dcae733e8fddd57c.mockapi.io/favourites/${product.id}`);
+			} else {
+				const { data } = await axios.post('https://63445df3dcae733e8fddd57c.mockapi.io/favourites', product);
+				setFavourites(prev => [...prev, data]);
+			}
+		} catch (error) {
+			alert('Не удалось добавить в закладки');
+		}
+	}
+
+	const addToCart = async (product) => {
+		try {
+			const { data } = await axios.post('https://63445df3dcae733e8fddd57c.mockapi.io/cart', product);
+			setCartProducts(prev => [...prev, data]);
+		} catch (error) {
+			alert('Не удалось добавить в корзину');
+		}
 	}
 
 	const removeCartProduct = (id) => {
 		axios.delete(`https://63445df3dcae733e8fddd57c.mockapi.io/cart/${id}`);
 		setCartProducts(prev => prev.filter(product => product.id !== id));
-	}
-
-	const addFavourite = (product) => {
-		axios.post('https://63445df3dcae733e8fddd57c.mockapi.io/favourites', product)
-			.then(response => response.data)
-			.then(data => setFavourites(prev => [...prev, data]));
 	}
 
 	return (
@@ -59,14 +76,18 @@ function App() {
 					<Route
 						path="/"
 						element={ <Products
-								addToCart={product => addToCart(product)}
-								addFavourite={product => addFavourite(product)}
+								products={products}
+								addToCart={addToCart}
+								addFavourite={addFavourite}
 							/> }
 					/>
 
 					<Route
 						path="/favourites"
-						element={ <Favourites favourites={favourites} /> }
+						element={ <Favourites
+								favourites={favourites}
+								addFavourite={addFavourite}
+							/> }
 					/>
 				</Routes>
 			</main>

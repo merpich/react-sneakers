@@ -4,14 +4,8 @@ import Title from '../components/ui/Title/Title';
 import Search from '../components/ui/Search/Search';
 import Card from '../components/blocks/Card/Card';
 
-function Products({ addToCart, addFavourite }) {
+function Products({ products, addToCart, addFavourite }) {
 	const [searchValue, setSearchValue] = useState('');
-	const [products, setProducts] = useState([]);
-
-	useEffect(() => {
-		axios.get('https://63445df3dcae733e8fddd57c.mockapi.io/products')
-			.then(response => setProducts(response.data));
-	}, []);
 
 	const onChangeSearch = (event) => {
 		setSearchValue(event.target.value);
@@ -32,11 +26,9 @@ function Products({ addToCart, addFavourite }) {
 							.map(item => (
 								<Card
 									key={item.id}
-									title={item.title}
-									imageUrl={item.imageUrl}
-									price={item.price}
 									addToCart={product => addToCart(product)}
 									addFavourite={product => addFavourite(product)}
+									{...item}
 								/>
 						))
 					) : (

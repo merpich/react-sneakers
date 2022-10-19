@@ -1,12 +1,14 @@
+import State from '../../ui/State/State';
+import CartProduct from '../CartProduct/CartProduct';
 import './Drawer.scss';
 
-function Drawer({ onClose, onRemove, items = [] }) {
+function Drawer({ onClose, onRemove, products = [] }) {
 	return (
-		<div className="overlay">
+		<div className="overlay" data-close="true" onClick={onClose}>
 			<div className="drawer">
 				<div className="drawer__header">
 					<h2 className="drawer__title">Корзина</h2>
-					<button className="drawer__button" onClick={onClose}>
+					<button className="drawer__button" data-close="true">
 						<svg className="drawer__icon" width={20} height={20}>
 							<use xlinkHref="/img/icons/sprites.svg#plus"></use>
 						</svg>
@@ -14,23 +16,19 @@ function Drawer({ onClose, onRemove, items = [] }) {
 				</div>
 
 				{
-					items.length > 0
+					products.length > 0
 						? (
 							<>
 								<div className="cart">
-									{items.map(item => (
-										<article className="cart-item">
-											<img className="cart-item__image" width={70} height={70} src={item.imageUrl} alt="Sneakers" />
-											<div className="cart-item__info">
-												<h4 className="cart-item__title">{item.title}</h4>
-												<span className="cart-item__price">{item.price} руб.</span>
-											</div>
-											<button className="cart-item__button" onClick={() => onRemove(item.id)}>
-												<svg className="cart-item__icon" width={11} height={11}>
-													<use xlinkHref="/img/icons/sprites.svg#plus"></use>
-												</svg>
-											</button>
-										</article>
+									{products.map(item => (
+										<CartProduct
+											key={item.id}
+											id={item.id}
+											title={item.title}
+											price={item.price}
+											imageUrl={item.imageUrl}
+											onRemove={id => onRemove(id)}
+										/>
 									))}
 								</div>
 
@@ -47,6 +45,7 @@ function Drawer({ onClose, onRemove, items = [] }) {
 											<span className="total__price">1074 руб.</span>
 										</li>
 									</ul>
+
 									<button className="button">
 										<span className="button__text">Оформить заказ</span>
 										<svg className="button__icon" width={16} height={14}>
@@ -56,7 +55,11 @@ function Drawer({ onClose, onRemove, items = [] }) {
 								</div>
 							</>
 						) : (
-							<div>Корзина пуста</div>
+							<State
+								title="Корзина пустая"
+								text="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
+								action="close"
+							/>
 						)
 				}
 			</div>

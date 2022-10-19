@@ -1,0 +1,23 @@
+.search {
+	display: flex;
+	align-items: center;
+	gap: 0 15px;
+	padding: 14px;
+	border-radius: var(--brs-third);
+	border: var(--border);
+	box-sizing: border-box;
+	cursor: text;
+	&__input {
+		border: 0;
+		outline: 0;
+		font-family: inherit;
+		font-size: 14px;
+		&::placeholder {
+			color: var(--fc-third);
+		}
+	}
+	&__icon {
+		fill: none;
+		stroke: var(--stroke);
+	}
+}

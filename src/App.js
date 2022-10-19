@@ -1,92 +1,74 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+
+import Drawer from './components/blocks/Drawer/Drawer';
+import Header from './components/blocks/Header/Header';
+import Favourites from './pages/Favourites';
+import Products from './pages/Products';
+
 import axios from 'axios';
-import Card from './components/Card/Card';
-import Drawer from './components/Drawer/Drawer';
-import Header from './components/Header/Header';
-import Favourites from './components/Favourites/Favourites';
 
 function App() {
-	const [items, setItems] = useState([]);
-	const [cartItems, setCartItems] = useState([]);
-	const [favourites, setFavourites] = useState([]);
-	const [searchValue, setSearchValue] = useState('');
 	const [cartOpened, setCartOpened] = useState(false);
+	const [cartProducts, setCartProducts] = useState([]);
+	const [favourites, setFavourites] = useState([]);
 
 	useEffect(() => {
-		axios.get('https://63445df3dcae733e8fddd57c.mockapi.io/items')
-			.then(response => setItems(response.data));
-
 		axios.get('https://63445df3dcae733e8fddd57c.mockapi.io/cart')
-			.then(response => setCartItems(response.data));
+			.then(response => setCartProducts(response.data));
 	}, []);
 
-	const addToCart = (product) => {
-		axios.post('https://63445df3dcae733e8fddd57c.mockapi.io/cart', product);
-		setCartItems(prev => [...prev, product]);
+	const closeCart = (event) => {
+		const target = event.target;
+
+		if (target.dataset.close || target.closest('button').dataset.close) {
+			setCartOpened(!cartOpened);
+		}
 	}
 
-	const removeCartItem = (id) => {
+	const addToCart = (product) => {
+		axios.post('https://63445df3dcae733e8fddd57c.mockapi.io/cart', product)
+			.then(response => response.data)
+			.then(data => setCartProducts(prev => [...prev, data]));
+	}
+
+	const removeCartProduct = (id) => {
 		axios.delete(`https://63445df3dcae733e8fddd57c.mockapi.io/cart/${id}`);
-		setCartItems(prev => prev.filter(item => item.id !== id));
+		setCartProducts(prev => prev.filter(product => product.id !== id));
 	}
 
 	const addFavourite = (product) => {
-		axios.post('https://63445df3dcae733e8fddd57c.mockapi.io/favourites', product);
-		setFavourites(prev => [...prev, product]);
-	}
-
-	const onChangeSearchInput = (event) => {
-		setSearchValue(event.target.value);
+		axios.post('https://63445df3dcae733e8fddd57c.mockapi.io/favourites', product)
+			.then(response => response.data)
+			.then(data => setFavourites(prev => [...prev, data]));
 	}
 
 	return (
 		<div className="wrapper">
-			{cartOpened
-				&& <Drawer
-					items={cartItems}
-					onClose={() => setCartOpened(false)}
-					onRemove={removeCartItem}
-				/>}
-
 			<Header onClickCart={() => setCartOpened(true)} />
 
-			<Routes>
-				<Route path="/favourites" element={<Favourites />} />
-			</Routes>
+			{cartOpened
+				&& <Drawer
+					onClose={closeCart}
+					onRemove={removeCartProduct}
+					products={cartProducts}
+				/>}
 
 			<main className="main">
-				<div className="content">
-					<div className="content__header">
-						<h1 className="title" value={searchValue}>{searchValue ? `Поиск по запросу: "${searchValue}"` : 'Все кроссовки'}</h1>
-						<label className="search">
-							<svg className="search__icon" width={14} height={14}>
-								<use xlinkHref="/img/icons/sprites.svg#search"></use>
-							</svg>
-							<input
-								className="search__input"
-								type="text"
-								placeholder="Поиск..."
-								onChange={onChangeSearchInput}
-							/>
-						</label>
-					</div>
+				<Routes>
+					<Route
+						path="/"
+						element={ <Products
+								addToCart={product => addToCart(product)}
+								addFavourite={product => addFavourite(product)}
+							/> }
+					/>
 
-					<div className="catalog">
-						{items
-							.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-							.map((item, index) => (
-							<Card
-								key={index}
-								title={item.title}
-								price={item.price}
-								imageUrl={item.imageUrl}
-								onFavourite={(product) => addFavourite(product)}
-								onPlus={(product) => addToCart(product)}
-							/>
-						))}
-					</div>
-				</div>
+					<Route
+						path="/favourites"
+						element={ <Favourites favourites={favourites} /> }
+					/>
+				</Routes>
 			</main>
 		</div>
 	);

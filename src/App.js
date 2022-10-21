@@ -9,6 +9,7 @@ import Products from './pages/Products';
 import axios from 'axios';
 
 function App() {
+	const [searchValue, setSearchValue] = useState('');
 	const [products, setProducts] = useState([]);
 	const [cartOpened, setCartOpened] = useState(false);
 	const [cartProducts, setCartProducts] = useState([]);
@@ -24,6 +25,10 @@ function App() {
 		axios.get('https://63445df3dcae733e8fddd57c.mockapi.io/favourites')
 			.then(response => setFavourites(response.data));
 	}, []);
+
+	const onChangeSearch = (event) => {
+		setSearchValue(event.target.value);
+	}
 
 	const closeCart = (event) => {
 		const target = event.target;
@@ -76,6 +81,8 @@ function App() {
 					<Route
 						path="/"
 						element={ <Products
+								onChangeSearch={onChangeSearch}
+								searchValue={searchValue}
 								products={products}
 								addToCart={addToCart}
 								addFavourite={addFavourite}

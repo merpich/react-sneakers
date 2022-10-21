@@ -1,16 +1,8 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import Title from '../components/ui/Title/Title';
 import Search from '../components/ui/Search/Search';
 import Card from '../components/blocks/Card/Card';
 
-function Products({ products, addToCart, addFavourite }) {
-	const [searchValue, setSearchValue] = useState('');
-
-	const onChangeSearch = (event) => {
-		setSearchValue(event.target.value);
-	}
-
+function Products({ products, addToCart, addFavourite, searchValue, onChangeSearch }) {
 	return (
 		<div className="content">
 			<div className="content__header">

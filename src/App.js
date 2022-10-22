@@ -14,16 +14,22 @@ function App() {
 	const [cartOpened, setCartOpened] = useState(false);
 	const [cartProducts, setCartProducts] = useState([]);
 	const [favourites, setFavourites] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		axios.get('https://63445df3dcae733e8fddd57c.mockapi.io/products')
-			.then(response => setProducts(response.data));
+		async function fetchData() {
+			const products = await axios.get('http://localhost/react-sneakers-api/get-products.php');
+			const cart = await axios.get('http://localhost/react-sneakers-api/get-cart.php');
+			const favourites = await axios.get('http://localhost/react-sneakers-api/get-favourites.php');
 
-		axios.get('https://63445df3dcae733e8fddd57c.mockapi.io/cart')
-			.then(response => setCartProducts(response.data));
+			setIsLoading(false);
 
-		axios.get('https://63445df3dcae733e8fddd57c.mockapi.io/favourites')
-			.then(response => setFavourites(response.data));
+			setCartProducts(cart.data);
+			setFavourites(favourites.data);
+			setProducts(products.data);
+		}
+
+		fetchData();
 	}, []);
 
 	const onChangeSearch = (event) => {
@@ -41,9 +47,9 @@ function App() {
 	const addFavourite = async (product) => {
 		try {
 			if (favourites.find(fav => fav.id === product.id)) {
-				axios.delete(`https://63445df3dcae733e8fddd57c.mockapi.io/favourites/${product.id}`);
+				axios.delete(`http://localhost/react-sneakers-api/delete-favourites-item.php?product_id=${product.id}`);
 			} else {
-				const { data } = await axios.post('https://63445df3dcae733e8fddd57c.mockapi.io/favourites', product);
+				const { data } = await axios.post(`http://localhost/react-sneakers-api/add-to-favourites.php?product_id=${product.id}`, product);
 				setFavourites(prev => [...prev, data]);
 			}
 		} catch (error) {
@@ -53,15 +59,20 @@ function App() {
 
 	const addToCart = async (product) => {
 		try {
-			const { data } = await axios.post('https://63445df3dcae733e8fddd57c.mockapi.io/cart', product);
-			setCartProducts(prev => [...prev, data]);
+			if (cartProducts.find(item => item.id === product.id)) {
+				axios.delete(`http://localhost/react-sneakers-api/delete-cart-item.php?product_id=${product.id}`);
+				setCartProducts(prev => prev.filter(item => item.id !== product.id));
+			} else {
+				const { data } = await axios.post('http://localhost/react-sneakers-api/add-to-cart.php', product);
+				setCartProducts(prev => [...prev, data]);
+			}
 		} catch (error) {
 			alert('Не удалось добавить в корзину');
 		}
 	}
 
 	const removeCartProduct = (id) => {
-		axios.delete(`https://63445df3dcae733e8fddd57c.mockapi.io/cart/${id}`);
+		axios.delete(`http://localhost/react-sneakers-api/delete-cart-item.php?product_id=${id}`);
 		setCartProducts(prev => prev.filter(product => product.id !== id));
 	}
 
@@ -80,13 +91,17 @@ function App() {
 				<Routes>
 					<Route
 						path="/"
-						element={ <Products
+						element={
+							<Products
 								onChangeSearch={onChangeSearch}
 								searchValue={searchValue}
 								products={products}
+								cartProducts={cartProducts}
 								addToCart={addToCart}
 								addFavourite={addFavourite}
-							/> }
+								isLoading={isLoading}
+							/>
+						}
 					/>
 
 					<Route

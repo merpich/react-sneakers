@@ -2,7 +2,21 @@ import Title from '../components/ui/Title/Title';
 import Search from '../components/ui/Search/Search';
 import Card from '../components/blocks/Card/Card';
 
-function Products({ products, addToCart, addFavourite, searchValue, onChangeSearch }) {
+function Products({ products, cartProducts, addToCart, addFavourite, searchValue, onChangeSearch, isLoading }) {
+	const renderItems = () => {
+		const filteredProducts = products.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()));
+		return (isLoading ? [...Array(4).fill({})] : filteredProducts).map(item => (
+			<Card
+				key={item.id}
+				addToCart={product => addToCart(product)}
+				addFavourite={product => addFavourite(product)}
+				added={cartProducts.some(obj => obj.id === item.id)}
+				loading={isLoading}
+				{...item}
+			/>
+		));
+	}
+
 	return (
 		<div className="content">
 			<div className="content__header">
@@ -11,21 +25,7 @@ function Products({ products, addToCart, addFavourite, searchValue, onChangeSear
 			</div>
 
 			<div className="catalog">
-				{products.length > 0
-					? (
-						products
-							.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-							.map(item => (
-								<Card
-									key={item.id}
-									addToCart={product => addToCart(product)}
-									addFavourite={product => addFavourite(product)}
-									{...item}
-								/>
-						))
-					) : (
-						<h2>Товаров нет</h2>
-					)}
+				{renderItems()}
 			</div>
 		</div>
 	);

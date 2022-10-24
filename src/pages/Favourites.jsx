@@ -1,8 +1,12 @@
-import Card from "../components/blocks/Card/Card";
-import State from "../components/ui/State/State";
-import Title from "../components/ui/Title/Title";
+import { useContext } from 'react';
+import Card from '../components/blocks/Card/Card';
+import State from '../components/ui/State/State';
+import Title from '../components/ui/Title/Title';
+import AppContext from '../context';
 
-function Favourites({ favourites, addFavourite }) {
+function Favourites() {
+	const { favourites, addFavourite } = useContext(AppContext);
+
 	return (
 		<div className="content">
 			{favourites.length > 0

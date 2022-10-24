@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import ContentLoader from 'react-content-loader';
+import AppContext from '../../../context';
 import './Card.scss';
 
-function Card({ id, title, imageUrl, price, addToCart, addFavourite, favourited = false, added = false, loading = false }) {
-	const [isAdded, setIsAdded] = useState(added);
+function Card({ id, title, imageUrl, price, addToCart, addFavourite, favourited = false, loading = false }) {
+	const { isProductAdded } = useContext(AppContext);
 	const [isFavourite, setIsFavourite] = useState(favourited);
 
 	const onPlus = () => {
 		addToCart({ id, title, imageUrl, price });
-		setIsAdded(!isAdded);
 	}
 
 	const onLike = () => {
@@ -57,15 +57,15 @@ function Card({ id, title, imageUrl, price, addToCart, addFavourite, favourited 
 						</div>
 
 						<button
-							className={`card__button ${isAdded && 'card__button_checked'}`}
+							className={`card__button ${isProductAdded(id) && 'card__button_checked'}`}
 							onClick={onPlus}
 						>
 							<svg
-								className={`card__icon ${isAdded ? 'card__icon_checked' : 'card__icon_plus'}`}
+								className={`card__icon ${isProductAdded(id) ? 'card__icon_checked' : 'card__icon_plus'}`}
 								width={11}
 								height={11}
 							>
-								<use xlinkHref={isAdded ? '/img/icons/sprites.svg#checked' : '/img/icons/sprites.svg#plus'}></use>
+								<use xlinkHref={isProductAdded(id) ? '/img/icons/sprites.svg#checked' : '/img/icons/sprites.svg#plus'}></use>
 							</svg>
 						</button>
 					</div>

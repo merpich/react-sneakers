@@ -1,8 +1,18 @@
+import { useContext, useState } from 'react';
+import AppContext from '../../../context';
 import State from '../../ui/State/State';
 import CartProduct from '../CartProduct/CartProduct';
 import './Drawer.scss';
 
 function Drawer({ onClose, onRemove, products = [] }) {
+	const [isOrderCompleted, setIsOrderCompleted] = useState(false);
+	const { setCartProducts } = useContext(AppContext);
+
+	const onClickOrder = () => {
+		setIsOrderCompleted(true);
+		setCartProducts([]);
+	}
+
 	return (
 		<div className="overlay" data-close="true" onClick={onClose}>
 			<div className="drawer">
@@ -47,7 +57,7 @@ function Drawer({ onClose, onRemove, products = [] }) {
 									</ul>
 
 									<button className="button">
-										<span className="button__text">Оформить заказ</span>
+										<span className="button__text" onClick={onClickOrder}>Оформить заказ</span>
 										<svg className="button__icon" width={16} height={14}>
 											<use xlinkHref="/img/icons/sprites.svg#arrow"></use>
 										</svg>
@@ -56,9 +66,9 @@ function Drawer({ onClose, onRemove, products = [] }) {
 							</>
 						) : (
 							<State
-								imageUrl="/img/icons/empty-cart.png"
-								title="Корзина пустая"
-								text="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
+								imageUrl={isOrderCompleted ? "/img/icons/order.png" : "/img/icons/empty-cart.png"}
+								title={isOrderCompleted ? "Заказ оформлен!" : "Корзина пустая"}
+								text="Ваш заказ #18 скоро будет передан курьерской доставке"
 								action="close"
 							/>
 						)

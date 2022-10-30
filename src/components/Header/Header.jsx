@@ -1,7 +1,15 @@
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { AppContext } from '../../context/AppContext';
 import './Header.scss';
 
-function Header({ onClickCart }) {
+function Header() {
+	const { setCartOpened } = useContext(AppContext);
+
+	function openCart() {
+		setCartOpened(true);
+	}
+
 	return (
 		<header className="header">
 			<NavLink to="/">
@@ -16,7 +24,7 @@ function Header({ onClickCart }) {
 			<nav className="nav">
 				<ul className="nav__list">
 					<li className="nav__item">
-						<button className="nav__button" onClick={onClickCart}>
+						<button className="nav__button" onClick={openCart}>
 							<svg className="nav__icon nav__icon_cart" width={20} height={20}>
 								<use xlinkHref="/img/icons/sprites.svg#cart"></use>
 							</svg>

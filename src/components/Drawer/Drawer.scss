@@ -92,6 +92,9 @@
 	&:active {
 		background: darken($color: #9DD458, $amount: 5%);
 	}
+	&:disabled {
+		background: var(--overlay)
+	}
 	&__text {
 		font-family: inherit;
 		font-size: 16px;
@@ -103,9 +106,5 @@
 		right: 30px;
 		stroke: var(--fc-second);
 		fill: none;
-		&_back {
-			left: 30px;
-			transform: rotate(180deg);
-		}
 	}
 }

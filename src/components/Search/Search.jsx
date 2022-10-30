@@ -1,6 +1,15 @@
+import { useContext } from 'react';
+import { AppContext } from '../../context/AppContext';
 import './Search.scss';
 
-function Search({ onChangeSearch }) {
+function Search() {
+	const { setSearchValue } = useContext(AppContext);
+
+	function changeSearch(event) {
+		const value = event.target.value;
+		setSearchValue(value);
+	}
+
 	return (
 		<label className="search">
 			<svg className="search__icon" width={14} height={14}>
@@ -10,7 +19,7 @@ function Search({ onChangeSearch }) {
 				className="search__input"
 				type="text"
 				placeholder="Поиск..."
-				onChange={onChangeSearch}
+				onChange={changeSearch}
 			/>
 		</label>
 	);

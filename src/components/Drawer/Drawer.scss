@@ -6,6 +6,11 @@
 	right: 0;
 	background: rgba(0, 0, 0, 0.5);
 	z-index: 5;
+	visibility: hidden;
+	transition: visibility 0.3s ease-in-out 0s;
+	&.open {
+		visibility: visible;
+	}
 }
 
 .drawer {
@@ -21,6 +26,11 @@
 	padding: 30px;
 	background: var(--bg-primary);
 	box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+	transform: translate(100%, 0);
+	transition: transform 0.3s ease-in-out 0s;
+	&.open {
+		transform: translate(0, 0);
+	}
 	&__header {
 		display: flex;
 		justify-content: space-between;

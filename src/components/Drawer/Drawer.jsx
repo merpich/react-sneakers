@@ -7,7 +7,7 @@ import './Drawer.scss';
 import { postData, replaceData } from '../../api/api';
 
 function Drawer() {
-	const { cartProducts, setCartProducts, setCartOpened, loading } = useContext(AppContext);
+	const { cartProducts, setCartProducts, cartOpened, setCartOpened, loading } = useContext(AppContext);
 	const [isOrderCompleted, setIsOrderCompleted] = useState(false);
 	const [orderId, setOrderId] = useState(null);
 	const [orderLoad, setOrderLoad] = useState(false);
@@ -38,8 +38,8 @@ function Drawer() {
 	}
 
 	return (
-		<div className="overlay" onClick={closeCart} data-close>
-			<div className="drawer">
+		<div className={`overlay${cartOpened ? ' open' : ''}`} onClick={closeCart} data-close>
+			<div className={`drawer${cartOpened ? ' open' : ''}`}>
 				<div className="drawer__header">
 					<h2 className="drawer__title">Корзина</h2>
 					<button className="drawer__button" data-close>

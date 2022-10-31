@@ -8,7 +8,7 @@ import Header from './components/Header/Header';
 import Drawer from './components/Drawer/Drawer';
 
 function App() {
-	const { setProducts, setCartProducts, setFavouriteProducts,  setLoading, cartOpened } = useContext(AppContext);
+	const { setProducts, setCartProducts, setFavouriteProducts,  setLoading } = useContext(AppContext);
 
 	useEffect(() => {
 		try {
@@ -32,7 +32,7 @@ function App() {
 	return (
 		<div className="wrapper">
 			<Header />
-			{cartOpened && <Drawer />}
+			<Drawer />
 			<div className="main">
 				<Routes>
 					<Route

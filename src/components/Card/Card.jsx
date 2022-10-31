@@ -39,11 +39,11 @@ function Card({ product_id, title, price, imageUrl }) {
 	return (
 		<article className="card">
 			<button
-				className={`card__button card__button_like ${isProductAdded(product_id, favouriteProducts) && 'card__button_like_active'}`}
+				className={`card__button card__button_like${isProductAdded(product_id, favouriteProducts) ? ' card__button_like_active' : ''}`}
 				onClick={addToFavourites}
 			>
 				<svg
-					className={`card__icon card__icon_like ${isProductAdded(product_id, favouriteProducts) && 'card__icon_like_active'}`}
+					className={`card__icon card__icon_like${isProductAdded(product_id, favouriteProducts) ? ' card__icon_like_active' : ''}`}
 					width={15}
 					height={15}
 				>
@@ -60,7 +60,7 @@ function Card({ product_id, title, price, imageUrl }) {
 				</div>
 
 				<button
-					className={`card__button ${isProductAdded(product_id, cartProducts) && 'card__button_checked'}`}
+					className={`card__button${isProductAdded(product_id, cartProducts) ? ' card__button_checked' : ''}`}
 					onClick={addToCart}
 				>
 					<svg

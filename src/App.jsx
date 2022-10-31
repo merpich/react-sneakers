@@ -13,9 +13,11 @@ function App() {
 	useEffect(() => {
 		try {
 			async function fetch() {
-				const products = await getData('products');
-				const cartProducts = await getData('cart');
-				const favouriteProducts = await getData('favourites');
+				const [products, cartProducts, favouriteProducts] = await Promise.all([
+					getData('products'),
+					getData('cart'),
+					getData('favourites')
+				]);
 
 				setProducts(products);
 				setCartProducts(cartProducts);

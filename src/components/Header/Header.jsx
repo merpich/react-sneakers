@@ -4,7 +4,9 @@ import { AppContext } from '../../context/AppContext';
 import './Header.scss';
 
 function Header() {
-	const { setCartOpened } = useContext(AppContext);
+	const { setCartOpened, cartProducts } = useContext(AppContext);
+
+	const totalPrice = cartProducts.reduce((sum, item) => item.price + sum, 0);
 
 	function openCart() {
 		setCartOpened(true);
@@ -28,7 +30,7 @@ function Header() {
 							<svg className="nav__icon nav__icon_cart" width={20} height={20}>
 								<use xlinkHref="/img/icons/sprites.svg#cart"></use>
 							</svg>
-							<span className="nav__cost">1205 руб.</span>
+							<span className="nav__cost">{totalPrice} руб.</span>
 						</button>
 					</li>
 					<li className="nav__item">

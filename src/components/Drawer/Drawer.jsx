@@ -12,6 +12,8 @@ function Drawer() {
 	const [orderId, setOrderId] = useState(null);
 	const [orderLoad, setOrderLoad] = useState(false);
 
+	const totalPrice = cartProducts.reduce((sum, item) => item.price + sum, 0);
+
 	function closeCart(event) {
 		const target = event.target;
 
@@ -68,12 +70,12 @@ function Drawer() {
 											<li className="total__item">
 												<span className="total__text">Итого:</span>
 												<div className="total__dashed"></div>
-												<span className="total__price">21 498 руб.</span>
+												<span className="total__price">{totalPrice} руб.</span>
 											</li>
 											<li className="total__item">
 												<span className="total__text">Налог 5%:</span>
 												<div className="total__dashed"></div>
-												<span className="total__price">1074 руб.</span>
+												<span className="total__price">{(totalPrice * 0.05).toFixed(2)} руб.</span>
 											</li>
 										</ul>
 

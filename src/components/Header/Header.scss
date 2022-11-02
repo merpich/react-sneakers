@@ -1,15 +1,26 @@
+@import "../../styles/libs/mixins";
+
 .header {
 	display: flex;
 	justify-content: space-between;
-	padding: 45px;
+	align-items: center;
+	flex-wrap: wrap;
+	padding: 20px;
+	gap: 20px;
 	border-bottom: var(--border);
+	@include media('min', 'width', 576) {
+		padding: 35px;
+	}
+	@include media('min', 'width', 991) {
+		padding: 45px;
+	}
 }
 
 .logo {
 	display: flex;
 	align-items: center;
 	&__img {
-		margin-right: 15px;
+		margin: 0 15px 0 0;
 	}
 	&__title {
 		font-size: 20px;
@@ -22,14 +33,20 @@
 	}
 }
 
-
 .nav {
 	display: flex;
 	align-items: center;
+	flex: 100%;
+	@include media('min', 'width', 480) {
+		flex: unset;
+	}
 	&__list {
 		display: flex;
 		align-items: center;
-		gap: 0 30px;
+		gap: 0 10px;
+		@include media('min', 'width', 576) {
+			gap: 0 30px;
+		}
 	}
 	&__button {
 		display: flex;
@@ -48,6 +65,7 @@
 	}
 	&__icon {
 		display: flex;
+		flex-shrink: 0;
 		fill: none;
 		stroke: var(--stroke);
 	}

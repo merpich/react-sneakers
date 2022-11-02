@@ -3,11 +3,17 @@
 @import "./variables";
 
 body {
-	padding: 85px 10px;
+	padding: 45px 0;
 	background: var(--bg-second);
 	font-family: 'Inter', system-ui;
 	font-size: 16px;
 	color: var(--fc-primary);
+	@include media('min', 'width', 768) {
+		padding: 85px 10px;
+	}
+	&.lock {
+		overflow: hidden;
+	}
 }
 
 .wrapper {
@@ -15,11 +21,17 @@ body {
 	margin: 0 auto;
 	background: var(--bg-primary);
 	border-radius: var(--brs-primary);
-	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
+	box-shadow: var(--shadow);
 }
 
 .main {
-	padding: 45px;
+	padding: 20px;
+	@include media('min', 'width', 576) {
+		padding: 35px;
+	}
+	@include media('min', 'width', 991) {
+		padding: 45px;
+	}
 }
 
 .content {
@@ -29,11 +41,24 @@ body {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		flex-wrap: wrap;
+		gap: 20px 30px;
 	}
 }
 
 .catalog {
 	display: grid;
-	grid-template-columns: (repeat(auto-fit, 222.5px));
-	gap: 40px;
+	grid-template-columns: 1fr;
+	gap: 20px;
+	@include media('min', 'width', 480) {
+		grid-template-columns: 1fr 1fr;
+	}
+	@include media('min', 'width', 700) {
+		grid-template-columns: repeat(3, 1fr);
+		gap: 30px;
+	}
+	@include media('min', 'width', 991) {
+		grid-template-columns: repeat(4, 1fr);
+		gap: 40px;
+	}
 }

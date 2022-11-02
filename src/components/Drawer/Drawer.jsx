@@ -19,6 +19,7 @@ function Drawer() {
 
 		if (target.dataset.close || target.closest('button[data-close]')) {
 			setCartOpened(false);
+			document.body.classList.remove('lock');
 		}
 	}
 

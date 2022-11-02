@@ -1,7 +1,7 @@
 .product {
 	display: flex;
 	align-items: center;
-	padding: 20px;
+	padding: 15px;
 	border-radius: var(--brs-second);
 	border: var(--border);
 	&__image {
@@ -22,6 +22,7 @@
 	&__button {
 		width: 32px;
 		height: 32px;
+		margin: 0 0 0 auto;
 		border-radius: var(--brs-third);
 		border: var(--border);
 		background: var(--bg-primary);

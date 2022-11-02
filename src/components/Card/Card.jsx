@@ -51,26 +51,32 @@ function Card({ product_id, title, price, imageUrl }) {
 				</svg>
 			</button>
 
-			<img className="card__image" width={130} height={110} src={imageUrl} alt="Sneakers" />
-			<h5 className="card__title">{title}</h5>
-			<div className="card__info">
-				<div className="card__cost">
-					<span className="card__price">Цена:</span>
-					<span className="card__number">{price} руб.</span>
-				</div>
+			<picture className='card__picture'>
+				<source media="(min-width: 480px)" width={130} height={110} srcSet={imageUrl} alt="Sneakers" />
+				<img width={80} src={imageUrl} alt="Sneakers" />
+			</picture>
 
-				<button
-					className={`card__button${isProductAdded(product_id, cartProducts) ? ' card__button_checked' : ''}`}
-					onClick={addToCart}
-				>
-					<svg
-						className={`card__icon ${isProductAdded(product_id, cartProducts) ? 'card__icon_checked' : 'card__icon_plus'}`}
-						width={11}
-						height={11}
+			<div className="card__description">
+				<h5 className="card__title">{title}</h5>
+				<div className="card__info">
+					<div className="card__cost">
+						<span className="card__price">Цена:</span>
+						<span className="card__number">{price} руб.</span>
+					</div>
+
+					<button
+						className={`card__button${isProductAdded(product_id, cartProducts) ? ' card__button_checked' : ''}`}
+						onClick={addToCart}
 					>
-						<use xlinkHref={isProductAdded(product_id, cartProducts) ? '/img/icons/sprites.svg#checked' : '/img/icons/sprites.svg#plus'}></use>
-					</svg>
-				</button>
+						<svg
+							className={`card__icon ${isProductAdded(product_id, cartProducts) ? 'card__icon_checked' : 'card__icon_plus'}`}
+							width={11}
+							height={11}
+						>
+							<use xlinkHref={isProductAdded(product_id, cartProducts) ? '/img/icons/sprites.svg#checked' : '/img/icons/sprites.svg#plus'}></use>
+						</svg>
+					</button>
+				</div>
 			</div>
 		</article>
 	);

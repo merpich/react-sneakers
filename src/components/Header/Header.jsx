@@ -10,6 +10,7 @@ function Header() {
 
 	function openCart() {
 		setCartOpened(true);
+		document.body.classList.add('lock');
 	}
 
 	return (

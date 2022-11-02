@@ -1,18 +1,28 @@
+@import "../../styles/libs/mixins";
+
 .card {
-	display: grid;
+	display: flex;
 	gap: 15px;
 	position: relative;
-	padding: 30px;
+	padding: 20px;
 	border-radius: var(--brs-primary);
 	border: var(--border);
 	background: var(--bg-primary);
 	transition: all 0.4s ease 0s;
+	@include media('min', 'width', 480) {
+		display: grid;
+		padding: 30px;
+	}
 	&:hover {
 		box-shadow: 0px 14px 30px rgba(0, 0, 0, 0.05);
 		transform: translate(0, -10px);
 	}
-	&__image {
+	&__picture {
 		margin: 0 auto;
+	}
+	&__description {
+		display: grid;
+		gap: 15px;
 	}
 	&__title {
 		font-size: 14px;
@@ -52,9 +62,13 @@
 		}
 		&_like {
 			position: absolute;
-			top: 30px;
-			left: 30px;
+			top: 15px;
+			left: 15px;
 			padding: 4px 0 0;
+			@include media('min', 'width', 480) {
+				top: 30px;
+				left: 30px;
+			}
 			&_active {
 				background: var(--btn-like);
 			}
